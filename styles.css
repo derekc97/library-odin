@@ -5,6 +5,7 @@
 
 body {
     /* background-color: black; */
+    font-family: sans-serif;
 }
 
 .container {
@@ -24,6 +25,8 @@ body {
     align-items: center;
     background-color: white;
     padding: 1rem;
+    gap: 2rem;
+    border-radius: 10%;
 }
 
 .button-row {
@@ -43,14 +46,39 @@ body {
 }
 
 .add-book:hover {
-    background-color: black;
-    border: 3px solid white;
-    color: white;
+    filter: brightness(90%);
 }
 
 .form-container {
     padding: 1rem;
     display: flex;
-    border: 2px solid blue;
+    border: 3px solid black;
     flex-direction: column;
+    border-top: none;
+}
+
+.book-title-div {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.book-author-div {
+    font-style: italic;
+    font-size: 1.05rem;
+}
+
+.change-button {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.change-button:hover {
+    filter: brightness(90%);
+}
+
+.remove-button {
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
 }

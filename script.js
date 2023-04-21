@@ -6,11 +6,16 @@ let formOpen = false;
 let myLibrary = [];
 
 // openBookForm();
+// let bookTest = new Book("Test Title", "Test Author", "69", true);
+// myLibrary.push(bookTest);
+// addBookToLibrary(bookTest);
 
 addBookButton.addEventListener("click", ()=> {
     openBookForm();
     addBookButton.style = "display:none"
 })
+
+
 
 //populate array 
 // function fluff() {
@@ -35,27 +40,55 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(newBook) {
     //add book to library
-    // myLibrary.forEach(book => {
-    //     let card = document.createElement("div");
-    //     card.textContent = book;
-    //     card.classList.add("bookCard");
-    //     bookContainer.appendChild(card);
-    //     // bookContainer.appendChild(card);
-    // });
     let newBookCard = document.createElement("div");
     newBookCard.classList.add("bookCard");
     let newBookTitleDiv = document.createElement("div");
     newBookTitleDiv.textContent = newBook.title;
+    newBookTitleDiv.classList.add("book-title-div");
     let newBookAuthorDiv = document.createElement("div");
     newBookAuthorDiv.textContent = newBook.author;
+    newBookAuthorDiv.classList.add("book-author-div");
     let newBookPagesDiv = document.createElement("div");
     newBookPagesDiv.textContent = newBook.pages;
+    newBookPagesDiv.classList.add("book-pages-div");
     let newBookReadDiv = document.createElement("div");
-    newBookReadDiv.textContent = newBook.read;
+    // newBookReadDiv.textContent = newBook.read;
+    let readChangeDiv = document.createElement("div");
+    let readChangeButton = document.createElement("button");
+    readChangeButton.classList.add("change-button");
+    
+    if (newBook.read == true) {
+        newBookReadDiv.textContent = "Read"
+        readChangeButton.textContent = "Not Completed";
+    } else if (newBook.read == false) {
+        newBookReadDiv.textContent = "Not Read"
+        readChangeButton.textContent = "Completed";
+    }
+
+    readChangeButton.addEventListener("click", ()=> {
+        if (readChangeButton.textContent == "Not Completed") {
+            readChangeButton.textContent = "Completed";
+        } else if (readChangeButton.textContent == "Completed") {
+            readChangeButton.textContent = "Not Completed";
+        };
+    });
+
+    let removeBookButtonDiv = document.createElement("div");
+    let removeBookButton = document.createElement("button");
+    removeBookButtonDiv.appendChild(removeBookButton);
+    removeBookButton.textContent = "x";
+    removeBookButton.classList.add("remove-button");
+    removeBookButton.addEventListener("click", ()=> {
+        newBookCard.remove();
+    })
+
+    readChangeDiv.appendChild(readChangeButton);
     newBookCard.appendChild(newBookTitleDiv);
     newBookCard.appendChild(newBookAuthorDiv);
     newBookCard.appendChild(newBookPagesDiv);
     newBookCard.appendChild(newBookReadDiv);
+    newBookCard.appendChild(readChangeDiv);
+    newBookCard.appendChild(removeBookButtonDiv);
     bookContainer.appendChild(newBookCard);
 }
 
