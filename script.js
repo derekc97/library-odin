@@ -5,11 +5,11 @@ let formOpen = false;
 
 let myLibrary = [];
 
-openBookForm();
+// openBookForm();
 
 addBookButton.addEventListener("click", ()=> {
     openBookForm();
-
+    addBookButton.style = "display:none"
 })
 
 //populate array 
@@ -23,22 +23,40 @@ addBookButton.addEventListener("click", ()=> {
 
 
 
-addBookToLibrary();
+// addBookToLibrary();
 
 //constructor
-function Book() {
-
+function Book(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
 }
 
-function addBookToLibrary() {
+function addBookToLibrary(newBook) {
     //add book to library
-    myLibrary.forEach(book => {
-        let card = document.createElement("div");
-        card.textContent = book;
-        card.classList.add("bookCard");
-        bookContainer.appendChild(card);
-        // bookContainer.appendChild(card);
-    });
+    // myLibrary.forEach(book => {
+    //     let card = document.createElement("div");
+    //     card.textContent = book;
+    //     card.classList.add("bookCard");
+    //     bookContainer.appendChild(card);
+    //     // bookContainer.appendChild(card);
+    // });
+    let newBookCard = document.createElement("div");
+    newBookCard.classList.add("bookCard");
+    let newBookTitleDiv = document.createElement("div");
+    newBookTitleDiv.textContent = newBook.title;
+    let newBookAuthorDiv = document.createElement("div");
+    newBookAuthorDiv.textContent = newBook.author;
+    let newBookPagesDiv = document.createElement("div");
+    newBookPagesDiv.textContent = newBook.pages;
+    let newBookReadDiv = document.createElement("div");
+    newBookReadDiv.textContent = newBook.read;
+    newBookCard.appendChild(newBookTitleDiv);
+    newBookCard.appendChild(newBookAuthorDiv);
+    newBookCard.appendChild(newBookPagesDiv);
+    newBookCard.appendChild(newBookReadDiv);
+    bookContainer.appendChild(newBookCard);
 }
 
 //open form on button click
@@ -137,5 +155,39 @@ function openBookForm() {
         addBookForm.appendChild(bookReadFormDiv);
         addBookForm.appendChild(formSubmitButtonDiv);
         body.appendChild(formContainer);
+
+        formSubmitButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            formOpen = false;
+            // console.log(bookNameForm.value);
+            // console.log(bookAuthorForm.value);
+            // console.log(bookPagesForm.value);
+            // if (bookYesInput.checked) {
+            //     console.log("true");
+            // } else if (bookNoInput.checked) {
+            //     console.log("false");
+            // }
+            let bookTitle = bookNameForm.value;
+            let bookAuthor = bookAuthorForm.value;
+            let bookPages = bookPagesForm.value;
+            let read;
+            if (bookYesInput.checked) {
+                read = true;
+            } else if (bookNoInput.checked) {
+                read = false;
+            }
+
+            let newBook = new Book(bookTitle, bookAuthor, bookPages, read);
+            // console.log(newBook);
+            addBookToLibrary(newBook);
+            addBookForm.reset();
+            // bookNameForm.value = "";
+            // bookAuthorForm.value = "";
+            // bookPagesForm.value = "";
+            formContainer.style = "display: none";
+            addBookButton.style = "display: block";
+        })
     }
 }
+
+// function addToLibrary
